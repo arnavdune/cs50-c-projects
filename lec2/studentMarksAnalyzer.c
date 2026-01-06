@@ -13,13 +13,23 @@ int average(int n, int list[]) {
 }
 
 int highest(int n, int list[]) {
-	int highestNumber = 0;
+	int highestNumber = list[0];
 	for (int i = 0; i < n; i++) {
 		if (list[i] > highestNumber) {
 			highestNumber = list[i];
 		}
 	}
 	return highestNumber;
+}
+
+int lowest(int n, int list[]) {
+	int lowestNumber = list[0];
+	for (int i = 0; i < n; i++) {
+		if (list[i] < lowestNumber) {
+			lowestNumber = list[i];
+		}
+	}
+	return lowestNumber;
 }
 
 int main(void) {
@@ -33,5 +43,6 @@ int main(void) {
 	}
 	printf("Average: %d\n", average(num, scores));
 	printf("Highest: %d\n", highest(num, scores));
+	printf("Lowest:  %d\n", lowest(num, scores));
 	return 0;
 }
