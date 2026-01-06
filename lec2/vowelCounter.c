@@ -10,5 +10,6 @@ int main(void) {
 	for (int i=0; i < n; i++) {
 		printf("%c", txt[i]);
 	}
+	printf("\n\n\n\n END \n");
 	return 0;
 }
