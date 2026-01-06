@@ -32,6 +32,16 @@ int lowest(int n, int list[]) {
 	return lowestNumber;
 }
 
+int aboveAverage(int n, int list[]) {
+	int a = 0; // Number of students who scored above average
+	for (int i = 0, avg = average(n, list); i < n; i++) {
+		if (list[i] >= avg) {
+			a++;
+		}
+	}
+	return a;
+}
+
 int main(void) {
 	int num; // Number of students
 	printf("Number of students: ");
@@ -44,5 +54,6 @@ int main(void) {
 	printf("Average: %d\n", average(num, scores));
 	printf("Highest: %d\n", highest(num, scores));
 	printf("Lowest:  %d\n", lowest(num, scores));
+	printf("Above average: %d\n", aboveAverage(num, scores));
 	return 0;
 }
