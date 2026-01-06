@@ -1,18 +1,37 @@
 // This program takes marks of n student and prints their average, highest marks, lowest marks and number of student that scored above average.
-#include <stdio.h>
-//#include <string.h>
+// input - number of students, list of scores
+// output - 
 
-int main(void)
-{
+#include <stdio.h>
+
+int average(int n, int list[]) {
+	int sum = 0;
+	for (int i = 0; i < n; i++) {
+		sum += list[i];
+	}
+	return sum / n;
+}
+
+int highest(int n, int list[]) {
+	int highestNumber = 0;
+	for (int i = 0; i < n; i++) {
+		if (list[i] > highestNumber) {
+			highestNumber = list[i];
+		}
+	}
+	return highestNumber;
+}
+
+int main(void) {
 	int num; // Number of students
 	printf("Number of students: ");
 	scanf("%d", &num);
 	int scores[num];
-	for (int i = 0; i > num; i++)
-	{
-		printf("Enter the %d's score: ", i);
-		scanf("%d", scores[i]);
+	for (int i = 0; i < num; i++) {
+		printf("Enter the %d's score: ", i + 1);
+		scanf("%d", &scores[i]);
 	}
-	printf("%d %d %d %d %d", scores[0], scores[1], scores[2], scores[3], scores[4]);
+	printf("Average: %d\n", average(num, scores));
+	printf("Highest: %d\n", highest(num, scores));
 	return 0;
 }
