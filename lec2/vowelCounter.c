@@ -7,45 +7,45 @@
 #include <ctype.h>
 
 int main(void) {
+	int total = 0;
 	int vowels = 0;
 	int consonants = 0;
 	int spaces = 0;
+	int numbers = 0;
 	int otherChar = 0;
-
-	const int vowelsList[10] = {65, 69, 73, 79, 85, 97, 101, 105, 111, 117};
-	const int consonantsList[42] = {
-	    // Uppercase consonants
-	    66, 67, 68, 70, 71, 72, 74, 75, 76, 77, 78, 80, 81, 82, 83, 84, 86, 87, 88, 89, 90,
-	    // Lowercase consonants
-	    98, 99, 100, 102, 103, 104, 106, 107, 108, 109, 110, 112, 113, 114, 115, 116, 118, 119, 120, 121, 122
-	};
-
 
 	string txt = get_string("Prompt: ");
 
 	for (int i = 0, n = strlen(txt); i < n; i++) {
-		if (txt[i] == 32)
+		char c = tolower(txt[i]); // c is the ith item of txt[];
+		if (c == ' ')
 		{
 			spaces++;
-			continue;
+			total++;
 		}
-		for (int l = 0; l < 10; l++) {
-			if (txt[i] == vowelsList[l]) {
-				vowels++;
-				continue;
-			}
-		}
-		for (int l = 0; l < 42; l++) {
-			if (txt[i] == consonantsList[l]) {
-				consonants++;
-				continue;
-			}
-		}
-		otherChar++;
-	}
+		else if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+			vowels++;
+			total++;
 
+		}
+		else if (c >= 'a' && c <= 'z') {
+			consonants++;
+			total++;
+		}
+		else if (c >= '0' && c <= '9') {
+			numbers++;
+			total++;
+		}
+		else {
+			otherChar++;
+			total++;
+		}
+		
+	}
+	printf("Total: %d\n", total);
 	printf("Vowels: %d\n", vowels);
 	printf("Consonants: %d\n", consonants);
+	printf("Numbers: %d\n", numbers);
 	printf("Spaces: %d\n", spaces);
 	printf("Other: %d\n", otherChar);
 	printf("\n END \n");
