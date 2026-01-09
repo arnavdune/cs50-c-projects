@@ -7,7 +7,8 @@
 int main(void)
 {
     string prompt = get_string("Prompt: ");
-    if (prompt == NULL) {
+    if (prompt == NULL || prompt[0] == '\0') {
+        printf("Empty input. Program ended.\n");
         return 1;
     }
     int spaceCount = 0;
