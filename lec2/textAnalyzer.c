@@ -6,7 +6,9 @@
 int main(void)
 {
     string prompt = get_string("Prompt: ");
-    int wordCount = 1;
+    int spaceCount = 0;
+    int wordCount = 0;
+    bool inWord = false;
     int letterCount = 0;
     int frequency[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     for (int i = 0, times = strlen(prompt); i < times; i++)
@@ -14,14 +16,19 @@ int main(void)
         char letter = tolower(prompt[i]);
         if (letter == ' ')
         {
-            wordCount++;
+            spaceCount++;
         }
         else if (isalpha(letter))
         {
             letterCount++;
-            frequency[(letter - 97)]++; // if letter is a (ascii - 97) then it will increase the frequency[97 - 97] by one 
+            frequency[letter - 97]++; // if letter is a (ascii - 97) then it will increase the frequency[97 - 97] by one 
+            if (!inWord){
+                wordCount++;
+                inWord = true;
+            }
         }
     }
+    
     // Results:-
     printf("Word count: %d\n", wordCount);
     printf("Letter count: %d\n", letterCount);
