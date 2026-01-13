@@ -10,7 +10,7 @@
 int count_word(string text);
 int count_sentence(string text);
 int count_letters(string text);
-int frequency(string text);
+void frequency(string text, int letterFreq[26]);
 
 int main(void) {
 	string text = get_string("Prompt: ");
@@ -22,14 +22,26 @@ int main(void) {
 		printf("No input! Program Ends!\n");
 		return 0;
 	}
+	
+	int freq[26];
+        frequency(text, freq);
+        
 	printf("Text Analysis Report\n");
 	printf("--------------------\n");
 	printf("Sentence:     %d\n", count_sentence(text));
 	printf("Word:         %d\n", count_word(text));
 	printf("Letters:      %d\n", count_letters(text));
 	printf("\n");
-	printf("Average Letter/Word:  %.2f\n", (float) count_letters(text) / count_word(text));
-	printf("\n\n\n%d\n\n", frequency(text));
+	printf("Average Letter/Word:     %.2f\n", (float) count_letters(text) / count_word(text));
+	printf("Average Word/Sentence:   %.2f\n", (float) count_word(text) / count_letters(text));
+	printf("\n");
+	
+        
+
+        for (int i = 0; i < 26; i++)
+        {
+            printf("%c: %d\n", 'A' + i, freq[i]);
+        }
 
 	return 0;
 }
@@ -44,44 +56,60 @@ int count_letters(string text) {
 	return numOfLetters;
 }
 
-int frequency(string text) {
-	int letterFreq[26] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-	for (long unsigned int i = 0, n = strlen(text); i < n; i++) {
-		if (isalpha(text[i])) {
-			letterFreq[((int) text[i] - 'A')]++;
-		}
-	}
-	return letterFreq;
+void frequency(string text, int letterFreq[26])
+{
+    for (int i = 0; i < 26; i++)
+    {
+        letterFreq[i] = 0;
+    }
+
+    for (int i = 0, n = strlen(text); i < n; i++)
+    {
+        if (isalpha((unsigned char) text[i]))
+        {
+            char c = tolower(text[i]);
+            letterFreq[c - 'a']++;
+        }
+    }
 }
 
-int count_word(string text) {
+int count_word(string text) 
+{
 	bool inWord = false;
 	int numOfWord = 0;
-	for (int i = 0, j = strlen(text); i < j; i++) {
+	for (int i = 0, j = strlen(text); i < j; i++) 
+	{
 		if ((text[i] >= 'A' && text[i] <= 'Z') || (text[i] >= 'a' && text[i] <= 'z')) // this check if the letter is between a - z or A - Z
 		{
-			if (!inWord) {
+			if (!inWord) 
+			{
 				inWord = true;
 				numOfWord++;
 			}
 		}
-		else {
+		else 
+		{
 			inWord = false;
 		}
 	}
 	return numOfWord;
 }
 
-int count_sentence(string text) {
+int count_sentence(string text) 
+{
 	int numOfSentence = 0;
 	bool isNewSentence = false;
-	for (int i = 0, n = strlen(text); i < n; i++) {
-		if (isalpha(text[i])) {
-			if (!isNewSentence) {
+	for (int i = 0, n = strlen(text); i < n; i++) 
+	{
+		if (isalpha(text[i])) 
+		{
+			if (!isNewSentence) 
+			{
 				isNewSentence = true;
 			}
 		}
-		if ((text[i] == '.' || text[i] == '!' || text[i] == '?') && (isNewSentence == true)) {
+		if ((text[i] == '.' || text[i] == '!' || text[i] == '?') && (isNewSentence == true)) 
+		{
 				numOfSentence++;
 				isNewSentence = false;
 		}
