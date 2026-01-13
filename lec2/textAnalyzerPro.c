@@ -10,10 +10,13 @@
 int count_word(string text);
 int count_sentence(string text);
 int count_letters(string text);
+int frequency(string text);
 
 int main(void) {
 	string text = get_string("Prompt: ");
-	//toupper(text);
+	for (int i = 0, n = strlen(text); i < n; i++) {
+		text[i] = toupper(text[i]);
+	}
 
 	if (text[0] == '\0' || text == NULL) {
 		printf("No input! Program Ends!\n");
@@ -26,6 +29,7 @@ int main(void) {
 	printf("Letters:      %d\n", count_letters(text));
 	printf("\n");
 	printf("Average Letter/Word:  %.2f\n", (float) count_letters(text) / count_word(text));
+	printf("\n\n\n%d\n\n", frequency(text));
 
 	return 0;
 }
@@ -38,6 +42,16 @@ int count_letters(string text) {
 		}
 	}
 	return numOfLetters;
+}
+
+int frequency(string text) {
+	int letterFreq[26] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	for (long unsigned int i = 0, n = strlen(text); i < n; i++) {
+		if (isalpha(text[i])) {
+			letterFreq[((int) text[i] - 'A')]++;
+		}
+	}
+	return letterFreq;
 }
 
 int count_word(string text) {
